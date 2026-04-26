@@ -1,169 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="description" content="FindThemNow — AI-powered global missing persons platform with live camera scanning, biometric matching, and worldwide emergency services.">
-<meta name="keywords" content="missing persons, find missing people, face recognition, emergency, SOS, global, biometric matching, live camera, fingerprint, iris scan">
-<meta name="theme-color" content="#0A0E1A">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta property="og:title" content="FindThemNow — Every Second Counts. Every Face Matters.">
-<meta property="og:description" content="AI-powered global missing persons platform with live camera scanning, biometric matching, and emergency services for 100+ countries.">
-<meta property="og:type" content="website">
-<title>FindThemNow — Every Second Counts. Every Face Matters.</title>
-<link rel="manifest" href="manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles/main.css">
+  <meta charset="UTF-8">
+  <!-- FIX: Removed maximum-scale=1.0 and user-scalable=no to allow zoom (WCAG 1.4.4) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FindThemNow — AI-powered global missing persons platform with live camera scanning, biometric matching, and worldwide emergency services.">
+  <meta name="keywords" content="missing persons, find missing people, face recognition, emergency, SOS, global, biometric matching, live camera, fingerprint, iris scan">
+  <meta name="theme-color" content="#0A0E1A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta property="og:title" content="FindThemNow — Every Second Counts. Every Face Matters.">
+  <meta property="og:description" content="AI-powered global missing persons platform with live camera scanning, biometric matching, and emergency services for 100+ countries.">
+  <meta property="og:type" content="website">
+  <title>FindThemNow — Every Second Counts. Every Face Matters.</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/accessibility.css">
 </head>
 <body>
 
-<!-- ============ SPLASH SCREEN ============ -->
-<div id="splashScreen" class="splash-screen">
-  <div class="splash-content">
-    <div class="splash-logo">
-      <div class="splash-icon-ring">
-        <svg viewBox="0 0 100 100" class="splash-scanner">
-          <circle cx="50" cy="50" r="45" fill="none" stroke="url(#splashGrad)" stroke-width="2" stroke-dasharray="280" stroke-dashoffset="280" class="splash-circle"/>
-          <defs><linearGradient id="splashGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F59E0B"/><stop offset="100%" stop-color="#10B981"/></linearGradient></defs>
-        </svg>
-        <span class="splash-eye">👁️</span>
+  <!-- FIX: Skip to main content link for keyboard/screen reader users (WCAG) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ============ SPLASH SCREEN ============ -->
+  <div id="splashScreen" class="splash-screen" role="status" aria-live="polite" aria-label="Loading FindThemNow">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <div class="splash-icon-ring">
+          <svg viewBox="0 0 100 100" class="splash-scanner" aria-hidden="true">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="url(#splashGrad)" stroke-width="2" stroke-dasharray="280" stroke-dashoffset="280" class="splash-circle"/>
+            <defs><linearGradient id="splashGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F59E0B"/><stop offset="100%" stop-color="#10B981"/></linearGradient></defs>
+          </svg>
+          <span class="splash-eye" aria-hidden="true">&#x1F441;&#xFE0F;</span>
+        </div>
+        <h1 class="splash-title">Find<span>Them</span>Now</h1>
+        <p class="splash-tagline">Every Second Counts. Every Face Matters.</p>
       </div>
-      <h1 class="splash-title">Find<span>Them</span>Now</h1>
-      <p class="splash-tagline">Every Second Counts. Every Face Matters.</p>
-    </div>
-    <div class="splash-loader">
-      <div class="splash-bar"></div>
-    </div>
-    <p class="splash-status">Initializing biometric systems...</p>
-  </div>
-</div>
-
-<!-- ============ SOS FLOATING BUTTON ============ -->
-<button class="sos-fab" id="sosFab" onclick="triggerSOS()" title="Emergency SOS">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
-  <span>SOS</span>
-  <div class="sos-pulse-ring"></div>
-</button>
-
-<!-- ============ TOP BAR ============ -->
-<header class="top-bar" id="topBar">
-  <div class="top-bar-inner">
-    <a href="#" class="logo" onclick="navigate('home')">
-      <div class="logo-icon">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <circle cx="14" cy="14" r="12" stroke="url(#logoGrad)" stroke-width="2.5" fill="none"/>
-          <circle cx="14" cy="11" r="4" fill="url(#logoGrad)"/>
-          <path d="M7 22c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#F59E0B"/><stop offset="1" stop-color="#10B981"/></linearGradient></defs>
-        </svg>
+      <div class="splash-loading">
+        <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+        <p class="splash-status">Initializing biometric systems...</p>
       </div>
-      <span class="logo-text">Find<em>Them</em>Now</span>
-    </a>
-    <nav class="nav-desktop" id="navDesktop">
-      <a href="#" onclick="navigate('home')" class="nav-link active" data-page="home">Home</a>
-      <a href="#" onclick="navigate('scanner')" class="nav-link" data-page="scanner">Live Scanner</a>
-      <a href="#" onclick="navigate('search')" class="nav-link" data-page="search">Search</a>
-      <a href="#" onclick="navigate('missing')" class="nav-link" data-page="missing">Missing Persons</a>
-      <a href="#" onclick="navigate('report')" class="nav-link" data-page="report">Report</a>
-      <a href="#" onclick="navigate('emergency')" class="nav-link" data-page="emergency">Emergency</a>
-      <a href="#" onclick="navigate('embassy')" class="nav-link" data-page="embassy">Embassy</a>
-      <a href="#" onclick="navigate('alerts')" class="nav-link" data-page="alerts">Alerts</a>
-    </nav>
-    <div class="nav-right">
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-      </button>
-      <button class="nav-sos-btn" onclick="navigate('emergency')">🆘 Emergency</button>
-      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </div>
-</header>
 
-<!-- ============ MOBILE NAV ============ -->
-<div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="toggleMobileNav()"></div>
-<nav class="mobile-nav" id="mobileNav">
-  <div class="mobile-nav-header">
-    <span class="logo-text">Find<em>Them</em>Now</span>
-    <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
+  <!-- ============ SOS FLOATING BUTTON ============ -->
+  <button
+    class="sos-float"
+    onclick="triggerSOS()"
+    aria-label="Activate SOS emergency alert and share location"
+    title="Activate SOS"
+  >SOS</button>
+
+  <!-- ============ DESKTOP NAVBAR ============ -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo" onclick="navigate('home')" aria-label="FindThemNow home">Find_Them_Now</a>
+    <div class="nav-links" role="menubar">
+      <a href="#" class="nav-link" onclick="navigate('home')" role="menuitem">Home</a>
+      <a href="#" class="nav-link" onclick="navigate('scanner')" role="menuitem">Live Scanner</a>
+      <a href="#" class="nav-link" onclick="navigate('search')" role="menuitem">Search</a>
+      <a href="#" class="nav-link" onclick="navigate('missing')" role="menuitem">Missing Persons</a>
+      <a href="#" class="nav-link" onclick="navigate('report')" role="menuitem">Report</a>
+      <a href="#" class="nav-link" onclick="navigate('emergency')" role="menuitem">Emergency</a>
+      <a href="#" class="nav-link" onclick="navigate('embassy')" role="menuitem">Embassy</a>
+      <a href="#" class="nav-link" onclick="navigate('alerts')" role="menuitem">Alerts</a>
+    </div>
+    <div class="nav-actions">
+      <!-- FIX: aria-label added to icon-only button -->
+      <button class="sos-btn" onclick="triggerSOS()" aria-label="Activate SOS emergency">&#x1F198; Emergency</button>
+    </div>
+  </nav>
+
+  <!-- ============ MOBILE NAVBAR ============ -->
+  <nav class="mobile-header" role="navigation" aria-label="Mobile navigation">
+    <a href="#" class="nav-logo" onclick="navigate('home')" aria-label="FindThemNow home">Find_Them_Now</a>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">&#x2600;&#xFE0F;</button>
+      <!-- FIX: aria-label added to hamburger button -->
+      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- ============ MOBILE NAV MENU ============ -->
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="mobile-nav-header">
+      <span class="nav-logo" aria-hidden="true">Find_Them_Now</span>
+      <button class="mobile-nav-close" onclick="toggleMobileNav()" aria-label="Close navigation menu">&#x2715;</button>
+    </div>
+    <a href="#" class="mobile-nav-link" onclick="navigate('home');toggleMobileNav()">&#x1F3E0; Home</a>
+    <a href="#" class="mobile-nav-link" onclick="navigate('scanner');toggleMobileNav()">&#x1F4F9; Live Scanner</a>
+    <a href="#" class="mobile-nav-link" onclick="navigate('search');toggleMobileNav()">&#x1F50D; Search Person</a>
+    <a href="#" class="mobile-nav-link" onclick="navigate('missing');toggleMobileNav()">&#x1F465; Missing Persons</a>
+    <a href="#" class="mobile-nav-link" onclick="navigate('report');toggleMobileNav()">&#x1F4CB; Report Missing</a>
+    <a href="#" class="mobile-nav-link" onclick="navigate('emergency');toggleMobileNav()">&#x1F198; Emergency Services</a>
+    <a href="#" class="mobile-nav-link" onclick="navigate('embassy');toggleMobileNav()">&#x1F3DB;&#xFE0F; Embassy Finder</a>
+    <a href="#" class="mobile-nav-link" onclick="navigate('alerts');toggleMobileNav()">&#x26A0;&#xFE0F; Active Alerts</a>
+    <button class="sos-btn" style="margin:16px" onclick="triggerSOS()" aria-label="Activate SOS emergency">&#x1F198; ACTIVATE SOS</button>
   </div>
-  <div class="mobile-nav-links">
-    <a href="#" onclick="navigate('home')">🏠 Home</a>
-    <a href="#" onclick="navigate('scanner')">📹 Live Scanner</a>
-    <a href="#" onclick="navigate('search')">🔍 Search Person</a>
-    <a href="#" onclick="navigate('missing')">👥 Missing Persons</a>
-    <a href="#" onclick="navigate('report')">📋 Report Missing</a>
-    <a href="#" onclick="navigate('emergency')">🆘 Emergency Services</a>
-    <a href="#" onclick="navigate('embassy')">🏛️ Embassy Finder</a>
-    <a href="#" onclick="navigate('alerts')">⚠️ Active Alerts</a>
+  <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="toggleMobileNav()" aria-hidden="true"></div>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <!-- FIX: id for skip-link target; role="main" for landmark -->
+  <main id="main-content" class="main-content" role="main" aria-live="polite" aria-atomic="false">
+    <!-- Skeleton loader shown while page renders -->
+    <div id="pageSkeleton" class="skeleton-page" aria-hidden="true">
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text short"></div>
+    </div>
+  </main>
+
+  <!-- ============ BOTTOM NAV (Mobile) ============ -->
+  <nav class="bottom-nav" role="navigation" aria-label="Bottom navigation">
+    <a href="#" onclick="navigate('home')" class="bottom-nav-item" aria-label="Home">&#x1F3E0;<span>Home</span></a>
+    <a href="#" onclick="navigate('scanner')" class="bottom-nav-item" aria-label="Live Scanner">&#x1F4F9;<span>Scanner</span></a>
+    <a href="#" onclick="navigate('search')" class="bottom-nav-item" aria-label="Search">&#x1F50D;<span>Search</span></a>
+    <a href="#" onclick="triggerSOS()" class="bottom-nav-item sos" aria-label="Activate SOS">&#x1F198;<span>SOS</span></a>
+    <a href="#" onclick="navigate('missing')" class="bottom-nav-item" aria-label="Missing Persons">&#x1F465;<span>Cases</span></a>
+  </nav>
+
+  <!-- ============ MODAL ============ -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <div class="modal" id="modalContent" tabindex="0">
+      <!-- Content injected by showModal() -->
+    </div>
   </div>
-  <div class="mobile-nav-footer">
-    <button class="mobile-sos-btn" onclick="triggerSOS()">🆘 ACTIVATE SOS</button>
+
+  <!-- ============ TOAST ============ -->
+  <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <span class="toast-icon" id="toastIcon" aria-hidden="true"></span>
+    <span class="toast-msg" id="toastMsg"></span>
   </div>
-</nav>
 
-<!-- ============ MAIN CONTENT ============ -->
-<main id="mainContent">
-  <!-- Pages are rendered dynamically by the router -->
-</main>
+  <!-- ============ SCRIPTS ============ -->
+  <!-- FIX: All scripts now use defer for non-blocking loading -->
+  <script src="js/database.js" defer></script>
+  <script src="js/emergency.js" defer></script>
+  <script src="js/embassy.js" defer></script>
+  <script src="js/biometrics.js" defer></script>
+  <script src="js/camera.js" defer></script>
+  <script src="js/router.js" defer></script>
+  <script src="js/app.js" defer></script>
 
-<!-- ============ BOTTOM NAVIGATION (MOBILE) ============ -->
-<nav class="bottom-nav" id="bottomNav">
-  <a href="#" onclick="navigate('home')" class="bottom-nav-item active" data-page="home">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    <span>Home</span>
-  </a>
-  <a href="#" onclick="navigate('scanner')" class="bottom-nav-item" data-page="scanner">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-    <span>Scanner</span>
-  </a>
-  <a href="#" onclick="navigate('search')" class="bottom-nav-item" data-page="search">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <span>Search</span>
-  </a>
-  <a href="#" onclick="navigate('emergency')" class="bottom-nav-item sos-tab" data-page="emergency">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    <span>SOS</span>
-  </a>
-  <a href="#" onclick="navigate('missing')" class="bottom-nav-item" data-page="missing">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-    <span>Cases</span>
-  </a>
-</nav>
+  <!-- FIX: Service Worker registration — removed console.log from inline script -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
 
-<!-- ============ TOAST ============ -->
-<div class="toast" id="toast">
-  <span class="toast-icon" id="toastIcon">✅</span>
-  <span class="toast-msg" id="toastMsg"></span>
-</div>
-
-<!-- ============ MODAL ============ -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal-content" id="modalContent">
-    <!-- Dynamic modal content -->
-  </div>
-</div>
-
-<!-- Scripts -->
-<script src="js/database.js"></script>
-<script src="js/emergency.js"></script>
-<script src="js/embassy.js"></script>
-<script src="js/biometrics.js"></script>
-<script src="js/camera.js"></script>
-<script src="js/router.js"></script>
-<script src="js/app.js"></script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('SW registered!', reg))
-        .catch(err => console.log('SW registration failed', err));
-    });
-  }
-</script>
 </body>
 </html>
