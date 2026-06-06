@@ -19,12 +19,12 @@ async function startCamera(videoElement) {
 }
 
 function stopCamera() {
+  scannerActive = false;
+  if (scanCleanup) { scanCleanup(); scanCleanup = null; }
   if (cameraStream) {
     cameraStream.getTracks().forEach(track => track.stop());
     cameraStream = null;
   }
-  scannerActive = false;
-  if (scanCleanup) { scanCleanup(); scanCleanup = null; }
 }
 
 async function switchCamera(videoElement) {
